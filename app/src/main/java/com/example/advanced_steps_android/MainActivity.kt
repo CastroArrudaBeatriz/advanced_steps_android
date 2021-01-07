@@ -11,8 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -26,17 +29,16 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        val componentName = ComponentName(this, MyJobService::class.java)
-        val jobInfo = JobInfo.Builder(1, componentName)
-            .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-            .build()
+        val myWorkManager = OneTimeWorkRequest.Builder(MyWorkManager::class.java).build()
+        val workManager = WorkManager.getInstance(this)
 
-        val jobScheduler = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+        workManager.enqueue(myWorkManager)
 
-        when(jobScheduler.schedule(jobInfo)){
-            JobScheduler.RESULT_SUCCESS -> Toast.makeText(this, "Job Service agendado com sucesso", Toast.LENGTH_LONG).show()
-            else -> Toast.makeText(this, "Job not scheduled", Toast.LENGTH_LONG).show()
-        }
+        workManager.getWorkInfoByIdLiveData(myWorkManager.id).observe(this, androidx.lifecycle.Observer {
+            if(it.state.isFinished){
+                Log.d("BAC", "WorkManager executado")
+            }
+        })
     }
 
     override fun onDestroy() {
