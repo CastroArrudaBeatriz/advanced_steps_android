@@ -34,6 +34,14 @@
         <service android:name=".IntentService"/>
 
         <service android:name=".MyJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+
+        <receiver
+            android:name=".MyBroadcast"
+            android:permission="my.app.PERMISSION">
+            <intent-filter>
+                <action android:name="com.example.broadcast.MY_ACTION_TO_BROADCAST" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
