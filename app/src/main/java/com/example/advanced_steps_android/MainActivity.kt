@@ -2,6 +2,7 @@ package com.example.advanced_steps_android
 
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,15 +14,25 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    private val myBroadcast = MyBroadcast()
+
     companion object{
         const val MY_ACTION = "android.intent.action.MY_ACTION_BASE"
         const val MY_CATEGORY = "android.intent.category.MY_CATEGORY"
+        const val MY_ACTION_BROADCAST = "android.intent.action.MY_ACTION_BROADCAST"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setButtonsListener()
+
+        applicationContext.registerReceiver(myBroadcast, IntentFilter(MY_ACTION_BROADCAST))
+    }
+
+
+    private fun setButtonsListener(){
         button_explicity_intent.setOnClickListener {
             print("Passou aqui no listener")
             val intentFilter = Intent(this, ActivityFilter::class.java)
@@ -65,5 +76,18 @@ class MainActivity : AppCompatActivity() {
             }
             startActivity(intentAlarm)
         }
+
+         button_emit_broadcast.setOnClickListener {
+            val intent = Intent().apply {
+                action = MY_ACTION_BROADCAST
+                putExtra("DATA", "yay")
+            }
+             applicationContext.sendBroadcast(intent)
+         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        applicationContext.unregisterReceiver(myBroadcast)
     }
 }
