@@ -17,18 +17,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        button_start_service.setOnClickListener {
-            val intentService = Intent(this, MyService::class.java)
-            startService(intentService)
-        }
-
-        button_stop_service.setOnClickListener {
-            val intentService = Intent(this, MyService::class.java)
-            stopService(intentService)
-        }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        val intentService = Intent(this, IntentService::class.java)
+        intentService.putExtra("text", txt_banana.text.toString())
+        startService(intentService)
+    }
 
     override fun onDestroy() {
         super.onDestroy()
