@@ -9,76 +9,22 @@
     android:paddingEnd="16dp">
 
     <Button
-        android:id="@+id/button_explicity_intent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Explicity Intent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"/>
-
-
-    <Button
-        android:id="@+id/button_implicity_intent_action"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Implicity Intent + Action"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_explicity_intent"
-        android:layout_marginTop="16dp"/>
+    android:id="@+id/button_start_service"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="start service"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_implicity_intent_action_category"
-        android:layout_width="match_parent"
+        android:id="@+id/button_stop_service"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Implicity Intent + Action + Category"
+        android:text="stop service"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_implicity_intent_action"
-        android:layout_marginTop="16dp"/>
-
-
-    <Button
-        android:id="@+id/button_open_page"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Open page"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_implicity_intent_action_category"
-        android:layout_marginTop="16dp"/>
-
-
-
-    <Button
-        android:id="@+id/button_make_call"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Make a Call"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_open_page"
-        android:layout_marginTop="16dp"/>
-
-    <Button
-        android:id="@+id/button_create_alarm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Create Alarm"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_make_call"
-        android:layout_marginTop="16dp"/>
-
-    <Button
-        android:id="@+id/button_emit_broadcast"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Emit broadcast"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_create_alarm"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintTop_toBottomOf="@id/button_start_service" />
 </androidx.constraintlayout.widget.ConstraintLayout>
