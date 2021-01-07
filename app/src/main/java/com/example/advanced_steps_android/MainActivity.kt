@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -35,9 +36,12 @@ class MainActivity : AppCompatActivity() {
         workManager.enqueue(myWorkManager)
 
         workManager.getWorkInfoByIdLiveData(myWorkManager.id).observe(this, androidx.lifecycle.Observer {
-            if(it.state.isFinished){
-                Log.d("BAC", "WorkManager executado")
-            }
+           when(it.state){
+               WorkInfo.State.SUCCEEDED -> {
+                   Log.d("BAC", "Work executado")
+                   it.outputData.getString("data")?.let { it1 -> Log.d("BAC" , it1) }
+               }
+           }
         })
     }
 
